@@ -1,0 +1,8 @@
+sentence = "this is a pen"
+words = sentence.split()
+
+# Check if "is" is at the correct position
+if len(words) > 1 and words[1] == "is":
+    print("The word 'is' is at the correct position.")
+else:
+    print("The word 'is' is not at the correct position.")
