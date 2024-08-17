@@ -1,0 +1,41 @@
+import random
+import time
+import matplotlib.pyplot as plt
+
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+
+def measure_time(arr):
+    start_time = time.time()
+    quicksort(arr)
+    end_time = time.time()
+    return end_time - start_time
+
+def run_experiments():
+    sizes = [100, 500, 1000, 5000, 10000, 50000, 100000]
+    times = []
+    
+    for size in sizes:
+        arr = [random.randint(0, 100000) for _ in range(size)]
+        time_taken = measure_time(arr)
+        times.append(time_taken)
+        print(f"Array Size: {size}, Time Taken: {time_taken:.6f} seconds")
+    
+    return sizes, times
+
+def plot_results(sizes, times):
+    plt.plot(sizes, times, marker='o')
+    plt.title('Time Complexity of Quicksort')
+    plt.xlabel('Array Size')
+    plt.ylabel('Time (seconds)')
+    plt.grid(True)
+    plt.show()
+
+sizes, times = run_experiments()
+plot_results(sizes, times)
